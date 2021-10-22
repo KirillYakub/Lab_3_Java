@@ -12,7 +12,7 @@ public class Database
     public Database()
     { list = new ArrayList<>(); }
 
-    public void add(double sideA, double sideB, double sideC, double perimeter, double area, double angleA, double angleB, double angleC)
+    public void add(int sideA, int sideB, int sideC, double perimeter, double area, double angleA, double angleB, double angleC)
     { list.add(new Triangle(sideA, sideB, sideC, perimeter, area, angleA, angleB, angleC)); }
 
     public static void cleans()
@@ -27,9 +27,9 @@ public class Database
         for(Triangle triangle : list)
         {
             try {
-                bufferedWriter.write((int) triangle.sideA + ";");
-                bufferedWriter.write((int) triangle.sideB + ";");
-                bufferedWriter.write((int) triangle.sideC + ";");
+                bufferedWriter.write(triangle.sideA + ";");
+                bufferedWriter.write(triangle.sideB + ";");
+                bufferedWriter.write(triangle.sideC + ";");
                 bufferedWriter.write((int) triangle.perimeter + ";");
                 bufferedWriter.write((int) triangle.area + ";");
                 bufferedWriter.write((int) triangle.angleA + ";");
@@ -54,7 +54,7 @@ public class Database
         {
             str = scanner.nextLine();
             String[] strings = str.split(";");
-            list.add(new Triangle(Double.parseDouble(strings[0]), Double.parseDouble(strings[1]), Double.parseDouble(strings[2]),
+            list.add(new Triangle(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]),
                     Double.parseDouble(strings[3]), Double.parseDouble(strings[4]), Double.parseDouble(strings[5]),
                     Double.parseDouble(strings[6]), Double.parseDouble(strings[7])));
         }
@@ -109,7 +109,7 @@ public class Database
         ArrayList<JSONObject> JSONList = JSON.parseObject(scanner.nextLine(), ArrayList.class);
         for (JSONObject jsonObject : JSONList)
         {
-            list.add(new Triangle(jsonObject.getDoubleValue("sideA"), jsonObject.getDoubleValue("sideB"), jsonObject.getDoubleValue("sideC"),
+            list.add(new Triangle(jsonObject.getIntValue("sideA"), jsonObject.getIntValue("sideB"), jsonObject.getIntValue("sideC"),
                     jsonObject.getDoubleValue("perimeter"), jsonObject.getDoubleValue("area"), jsonObject.getDoubleValue("angleA"),
                     jsonObject.getDoubleValue("angleB"), jsonObject.getDoubleValue("angleC")));
         }
